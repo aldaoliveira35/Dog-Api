@@ -13,14 +13,15 @@ export function Homepage() {
         console.error(error);
       }
     }
+
     listDogs();
   }, []);
 
   return (
     <>
-      <div>
+      <div className="dog-images-wrapper">
         {dogs.map((dog, index) => (
-          <div className="dogImage">
+          <div className="dog-image">
             <img src={dog.url} key={index} />
           </div>
         ))}

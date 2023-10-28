@@ -1,11 +1,17 @@
-div {
-  display: grid;
-  grid-row: auto;
+.dog-images-wrapper {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.dogImage {
+.dog-image {
   height: 300px;
   width: 33.3%;
-  gap: 20px;
-  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.dog-image img {
+  height: 100%;
 }
