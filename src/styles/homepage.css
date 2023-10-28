@@ -1,0 +1,11 @@
+div {
+  display: grid;
+  grid-row: auto;
+}
+
+.dogImage {
+  height: 300px;
+  width: 33.3%;
+  gap: 20px;
+  object-fit: cover;
+}
