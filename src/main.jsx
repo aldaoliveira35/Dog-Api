@@ -18,7 +18,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/breeds" element={<Breeds />} />
           <Route path="/upload" element={<Upload />} />
         </Routes>
-        <Homepage />
       </Box>
     </BrowserRouter>
   </React.StrictMode>

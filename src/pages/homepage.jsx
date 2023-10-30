@@ -7,21 +7,32 @@ export function Homepage() {
   const [dogs, setDogs] = useState([]);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     async function listDogs() {
       try {
-        setDogs(await getDogs());
+        const response = await getDogs(abortController.signal);
+        if (response) {
+          setDogs(response);
+        }
       } catch (error) {
         console.error(error);
       }
     }
 
     listDogs();
+
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   return (
-    <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
+    <Grid spacing={2} container>
       {dogs.map((dog) => (
-        <Image data={dog} key={dog.id} />
+        <Grid item key={dog.id} xs={6} md={4} lg={3} xl={2}>
+          <Image data={dog} />
+        </Grid>
       ))}
     </Grid>
   );
