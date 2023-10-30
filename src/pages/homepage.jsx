@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 import { getDogs } from "../api-clients/dog-api-client";
-import "../styles/homepage.css";
+import { Image } from "./image";
 
 export function Homepage() {
   const [dogs, setDogs] = useState([]);
@@ -18,14 +19,10 @@ export function Homepage() {
   }, []);
 
   return (
-    <>
-      <div className="dog-images-wrapper">
-        {dogs.map((dog, index) => (
-          <div className="dog-image">
-            <img src={dog.url} key={index} />
-          </div>
-        ))}
-      </div>
-    </>
+    <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
+      {dogs.map((dog) => (
+        <Image data={dog} key={dog.id} />
+      ))}
+    </Grid>
   );
 }

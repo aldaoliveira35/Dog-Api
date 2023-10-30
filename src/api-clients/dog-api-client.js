@@ -3,7 +3,7 @@ const API_KEY =
   "live_N6DMObLIWAVvIySPFGTfQzR0SgoPEn4K3tucu6NfdVjsi9qs0w4F5oRg6wIEFztm";
 
 export function getDogs() {
-  const searchParams = new URLSearchParams({ limit: 60 });
+  const searchParams = new URLSearchParams({ limit: 10 });
   return request("GET", "images/search?" + searchParams.toString());
 }
 
