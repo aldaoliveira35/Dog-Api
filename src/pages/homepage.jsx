@@ -1,46 +1,12 @@
-import { useEffect, useState } from "react";
 import { Grid, CircularProgress, Box, Typography } from "@mui/material";
-import { searchImages, addFavoriteImage } from "../api-clients/dog-api-client";
+
 import { DogCard } from "../components/dog-card/DogCard";
+import { useFavorites } from "../hooks/useFavorites";
+import { useSearchImages } from "../hooks/useSearchImages";
 
 export function Homepage() {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const handleFavorite = (image) => {
-    addFavoriteImage(image.id);
-  };
-
-  useEffect(() => {
-    const abortController = new AbortController();
-
-    async function listImages() {
-      try {
-        const response = await searchImages(abortController.signal);
-        if (response) {
-          const formattedResponse = response.map((image) => {
-            const breed = image.breeds.map((breed) => breed.name).join(" / ");
-
-            return {
-              breed: breed || "Unknown Breed",
-              image: image.url,
-              id: image.id,
-            };
-          });
-          setImages(formattedResponse);
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    listImages();
-
-    return () => {
-      abortController.abort();
-    };
-  }, []);
+  const { images, loading } = useSearchImages();
+  const { favorites, addToFavorites, removeFavorite } = useFavorites();
 
   return (
     <>
@@ -61,17 +27,26 @@ export function Homepage() {
       )}
       {!loading && (
         <Grid spacing={2} container>
-          {images.map((image) => (
-            <Grid item key={image.id} xs={6} md={4} lg={3} xl={2}>
-              <DogCard
-                title={image.breed}
-                image={image.image}
-                onFavoriteClick={() => {
-                  handleFavorite(image);
-                }}
-              />
-            </Grid>
-          ))}
+          {images.map((image) => {
+            const imageFavorite = favorites.find(
+              ({ imageId }) => imageId === image.id
+            );
+
+            return (
+              <Grid item key={image.id} xs={6} md={4} lg={3} xl={2}>
+                <DogCard
+                  title={image.breed}
+                  image={image.image}
+                  isFavorite={imageFavorite !== undefined}
+                  onFavoriteClick={() => {
+                    imageFavorite !== undefined
+                      ? removeFavorite(imageFavorite.id)
+                      : addToFavorites(image.id);
+                  }}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
       )}
     </>

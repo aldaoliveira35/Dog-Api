@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-export function DogCard({ image, title, onFavoriteClick }) {
+export function DogCard({ image, title, isFavorite, onFavoriteClick }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader title={title} />
@@ -17,7 +17,11 @@ export function DogCard({ image, title, onFavoriteClick }) {
         <Typography variant="body2" color="text.secondary"></Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={onFavoriteClick}>
+        <IconButton
+          aria-label="add to favorites"
+          onClick={onFavoriteClick}
+          color={isFavorite ? "secondary" : ""}
+        >
           <FavoriteIcon />
         </IconButton>
       </CardActions>
