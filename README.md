@@ -1,6 +1,6 @@
 This is a project developed during the Mindera Front-End Bootcamp, interacting with a Dog API.
 
-# HOW TO RUN: 
+# HOW TO RUN 
 ```bash
 yarn install
 yarn dev
