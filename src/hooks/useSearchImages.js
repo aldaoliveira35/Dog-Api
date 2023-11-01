@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { searchImages } from "../api-clients/dog-api-client";
 
-export function useSearchImages() {
+export function useSearchImages(breedId) {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +11,7 @@ export function useSearchImages() {
 
     async function fetchImages() {
       try {
-        const response = await searchImages(abortController.signal);
+        const response = await searchImages(abortController.signal, breedId);
 
         if (response) {
           const formattedResponse = response.map((image) => {
@@ -36,7 +36,7 @@ export function useSearchImages() {
     return () => {
       abortController.abort();
     };
-  }, []);
+  }, [breedId]);
 
   return { images, loading };
 }

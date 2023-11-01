@@ -7,6 +7,7 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Tooltip from "@mui/material/Tooltip";
 
 export function DogCard({ image, title, isFavorite, onFavoriteClick }) {
   return (
@@ -17,13 +18,17 @@ export function DogCard({ image, title, isFavorite, onFavoriteClick }) {
         <Typography variant="body2" color="text.secondary"></Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton
-          aria-label="add to favorites"
-          onClick={onFavoriteClick}
-          color={isFavorite ? "secondary" : ""}
+        <Tooltip
+          title={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
-          <FavoriteIcon />
-        </IconButton>
+          <IconButton
+            aria-label="add to favorites"
+            onClick={onFavoriteClick}
+            color={isFavorite ? "secondary" : ""}
+          >
+            <FavoriteIcon />
+          </IconButton>
+        </Tooltip>
       </CardActions>
     </Card>
   );

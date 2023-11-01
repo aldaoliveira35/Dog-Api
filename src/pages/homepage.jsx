@@ -1,4 +1,7 @@
-import { Grid, CircularProgress, Box, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
 
 import { DogCard } from "../components/dog-card/DogCard";
 import { useFavorites } from "../hooks/useFavorites";

@@ -37,6 +37,7 @@ export function useFavorites() {
           const formattedResponse = response.map((favorite) => ({
             id: favorite.id,
             imageId: favorite.image.id,
+            imageUrl: favorite.image.url,
           }));
 
           setLoading(false);

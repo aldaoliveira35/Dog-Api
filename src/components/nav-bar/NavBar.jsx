@@ -12,6 +12,9 @@ export function NavBar() {
         <Link className="link" to="/breeds">
           Breeds
         </Link>
+        <Link className="link" to="/favorites">
+          Favorites
+        </Link>
         <Link className="link" to="/upload">
           Upload Picture
         </Link>
