@@ -1,14 +1,27 @@
 import { useState } from "react";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Grid,
+  Box,
+  Typography,
+} from "@mui/material";
 import { useBreeds } from "../hooks/useBreeds";
-import { useSearchImages } from "../hooks/useSearchImages";
+import { useSearchImagesByBreed } from "../hooks/useSearchImagesByBreed";
+import { LoadingPlaceholder } from "../components/loading-placeholder/LoadingPlaceholder";
+import { DogCard } from "../components/dog-card/DogCard";
+import { useFavorites } from "../hooks/useFavorites";
 
 export function Breeds() {
-  const [breed, setBreed] = useState("");
+  const [selectedBreed, setSelectedBreed] = useState(null);
   const { breeds } = useBreeds();
-  const { images } = useSearchImages(breed);
+  const { favorites, addToFavorites, removeFavorite } = useFavorites();
+  const { images, loading } = useSearchImagesByBreed(selectedBreed?.id);
 
-  const handleChange = (e) => setBreed(e.target.value);
+  const handleChange = (e) =>
+    setSelectedBreed(breeds.find((breed) => e.target.value === breed.id));
 
   return (
     <>
@@ -17,7 +30,7 @@ export function Breeds() {
         <Select
           labelId="breed-label"
           label="Breed"
-          value={breed}
+          value={selectedBreed?.id || ""}
           onChange={handleChange}
         >
           {breeds.map((breed) => (
@@ -27,9 +40,51 @@ export function Breeds() {
           ))}
         </Select>
       </FormControl>
-      {images.map((image) => (
-        <img key={image.id} src={image.image} />
-      ))}
+
+      {selectedBreed && (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <Typography>Breed name: {selectedBreed.name}</Typography>
+          <Typography>Weight: {selectedBreed.weight}</Typography>
+          <Typography>Height: {selectedBreed.height}</Typography>
+          <Typography>Life span: {selectedBreed.lifeSpan}</Typography>
+          <Typography>Origin: {selectedBreed.origin}</Typography>
+          <Typography>Temperament: {selectedBreed.temperament}</Typography>
+          <Typography>Bred for: {selectedBreed.bredFor}</Typography>
+        </Box>
+      )}
+
+      {loading && <LoadingPlaceholder />}
+
+      {!loading && (
+        <Grid spacing={2} container>
+          {images.map((image) => {
+            const imageFavorite = favorites.find(
+              ({ imageId }) => imageId === image.id
+            );
+            return (
+              <Grid item key={image.id} xs={6} md={4} lg={3} xl={2}>
+                <DogCard
+                  image={image.image}
+                  isFavorite={imageFavorite !== undefined}
+                  onFavoriteClick={() => {
+                    imageFavorite !== undefined
+                      ? removeFavorite(imageFavorite.id)
+                      : addToFavorites(image.id);
+                  }}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
+      )}
     </>
   );
 }

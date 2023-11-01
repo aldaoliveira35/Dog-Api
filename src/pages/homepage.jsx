@@ -4,6 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 
 import { DogCard } from "../components/dog-card/DogCard";
+import { LoadingPlaceholder } from "../components/loading-placeholder/LoadingPlaceholder";
 import { useFavorites } from "../hooks/useFavorites";
 import { useSearchImages } from "../hooks/useSearchImages";
 
@@ -13,21 +14,7 @@ export function Homepage() {
 
   return (
     <>
-      {loading && (
-        <Box
-          sx={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CircularProgress sx={{ marginBottom: 2 }} />
-          <Typography>Loading Happiness</Typography>
-        </Box>
-      )}
+      {loading && <LoadingPlaceholder />}
       {!loading && (
         <Grid spacing={2} container>
           {images.map((image) => {
