@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ThemeProvider theme={{}}>
       <BrowserRouter>
         <NavBar />
-        <Box sx={{ height: "calc(100% - 50px)" }}>
+        <Box sx={{ height: "calc(100% - 64px)", padding: 2 }}>
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/breeds" element={<Breeds />} />

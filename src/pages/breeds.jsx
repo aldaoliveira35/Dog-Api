@@ -48,16 +48,21 @@ export function Breeds() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: 2,
+            gap: 3,
           }}
         >
-          <Typography>Breed name: {selectedBreed.name}</Typography>
-          <Typography>Weight: {selectedBreed.weight}</Typography>
-          <Typography>Height: {selectedBreed.height}</Typography>
-          <Typography>Life span: {selectedBreed.lifeSpan}</Typography>
-          <Typography>Origin: {selectedBreed.origin}</Typography>
-          <Typography>Temperament: {selectedBreed.temperament}</Typography>
-          <Typography>Bred for: {selectedBreed.bredFor}</Typography>
+          <Typography>Weight: {selectedBreed.weight || "unknown"}</Typography>
+          <Typography>Height: {selectedBreed.height || "unknown"}</Typography>
+          <Typography>
+            Life span: {selectedBreed.lifeSpan || "unknown"}
+          </Typography>
+          <Typography>Origin: {selectedBreed.origin || "unknown"}</Typography>
+          <Typography>
+            Temperament: {selectedBreed.temperament || "unknown"}
+          </Typography>
+          <Typography>
+            Bred for: {selectedBreed.bredFor || "unknown"}
+          </Typography>
         </Box>
       )}
 

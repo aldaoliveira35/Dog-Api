@@ -20,7 +20,7 @@ export function getFavorites(signal) {
 
 export function searchImages(signal, breedId) {
   const searchParams = new URLSearchParams({
-    limit: 60,
+    limit: 10,
     has_breeds: 1,
   });
 

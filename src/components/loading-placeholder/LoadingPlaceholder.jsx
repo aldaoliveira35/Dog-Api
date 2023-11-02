@@ -13,7 +13,7 @@ export function LoadingPlaceholder() {
       }}
     >
       <CircularProgress sx={{ marginBottom: 2 }} />
-      <Typography>Loading Happiness</Typography>
+      <Typography variant="h5">Loading Puppies</Typography>
     </Box>
   );
 }

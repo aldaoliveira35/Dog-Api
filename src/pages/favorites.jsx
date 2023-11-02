@@ -41,7 +41,9 @@ export function Favorites() {
             gap: 2,
           }}
         >
-          <p>You don't have any favorites yet!</p>
+          <Typography variant="h2">
+            You don't have any favorites yet!
+          </Typography>
           <Button component={Link} to="/" variant="outlined">
             Go Fetch them!
           </Button>
