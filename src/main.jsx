@@ -30,7 +30,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             display: "flex",
             flexDirection: "column",
             height: "calc(100% - 64px)",
-            backgroundColor: "#FDFAF9",
           }}
         >
           <Routes>
