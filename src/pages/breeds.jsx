@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FormControl,
   InputLabel,
@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useBreeds } from "../hooks/useBreeds";
-import { useSearchImagesByBreed } from "../hooks/useSearchImagesByBreed";
+import { useSearchImages } from "../hooks/useSearchImages";
 import { LoadingPlaceholder } from "../components/loading-placeholder/LoadingPlaceholder";
 import { DogCard } from "../components/dog-card/DogCard";
 import { useFavorites } from "../hooks/useFavorites";
@@ -18,15 +18,30 @@ export function Breeds() {
   const [selectedBreed, setSelectedBreed] = useState(null);
   const { breeds } = useBreeds();
   const { favorites, addToFavorites, removeFavorite } = useFavorites();
-  const { images, loading } = useSearchImagesByBreed(selectedBreed?.id);
+  const { images, loading } = useSearchImages(
+    selectedBreed !== null,
+    selectedBreed?.id
+  );
 
-  const handleChange = (e) =>
-    setSelectedBreed(breeds.find((breed) => e.target.value === breed.id));
+  useEffect(() => {
+    if (breeds.length > 0) {
+      setSelectedBreed(breeds[0]);
+    }
+  }, [breeds]);
+
+  const handleChange = (event) => {
+    setSelectedBreed(breeds.find((breed) => event.target.value === breed.id));
+  };
 
   return (
     <>
-      <FormControl fullWidth>
-        <InputLabel id="breed-label">Fetch breed</InputLabel>
+      <Box>
+        <Typography sx={{ marginBottom: 2 }}>
+          Searching for some details? Fetch the breed!
+        </Typography>
+      </Box>
+      <FormControl sx={{ width: "33%", color: "primary" }}>
+        <InputLabel id="breed-label">Breed</InputLabel>
         <Select
           labelId="breed-label"
           label="Breed"
@@ -48,7 +63,8 @@ export function Breeds() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: 3,
+            gap: 1,
+            marginBottom: 1,
           }}
         >
           <Typography>Weight: {selectedBreed.weight || "unknown"}</Typography>
@@ -68,7 +84,7 @@ export function Breeds() {
 
       {loading && <LoadingPlaceholder />}
 
-      {!loading && (
+      {!loading && images.length > 0 && (
         <Grid spacing={2} container>
           {images.map((image) => {
             const imageFavorite = favorites.find(

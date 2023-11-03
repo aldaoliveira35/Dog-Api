@@ -5,14 +5,14 @@ export function LoadingPlaceholder() {
     <Box
       sx={{
         width: "100%",
-        height: "100%",
+        flexGrow: 1,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
       }}
     >
-      <CircularProgress sx={{ marginBottom: 2 }} />
+      <CircularProgress sx={{ marginBottom: 2, color: "primary" }} />
       <Typography variant="h5">Loading Puppies</Typography>
     </Box>
   );

@@ -7,28 +7,14 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { DogCard } from "../components/dog-card/DogCard";
 import { useFavorites } from "../hooks/useFavorites";
+import { LoadingPlaceholder } from "../components/loading-placeholder/LoadingPlaceholder";
 
 export function Favorites() {
   const { loading, favorites, removeFavorite } = useFavorites();
 
   return (
     <>
-      {loading && (
-        <Box
-          sx={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 2,
-          }}
-        >
-          <CircularProgress />
-          <Typography>Loading Happiness</Typography>
-        </Box>
-      )}
+      {loading && <LoadingPlaceholder />}
       {!loading && favorites.length === 0 && (
         <Box
           sx={{
@@ -44,7 +30,7 @@ export function Favorites() {
           <Typography variant="h2">
             You don't have any favorites yet!
           </Typography>
-          <Button component={Link} to="/" variant="outlined">
+          <Button component={Link} to="/" variant="contained">
             Go Fetch them!
           </Button>
         </Box>

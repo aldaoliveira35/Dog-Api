@@ -37,7 +37,5 @@ export function useBreeds() {
     };
   }, []);
 
-  return {
-    breeds,
-  };
+  return { breeds };
 }

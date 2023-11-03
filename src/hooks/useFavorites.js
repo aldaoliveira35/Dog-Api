@@ -6,7 +6,7 @@ import {
   removeFavoriteImage,
 } from "../api-clients/dog-api-client";
 
-export function useFavorites() {
+export function useFavorites(isEnabled = true) {
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
 
@@ -48,12 +48,14 @@ export function useFavorites() {
       }
     }
 
-    fetchFavorites();
+    if (isEnabled) {
+      fetchFavorites();
+    }
 
     return () => {
       abortController.abort();
     };
-  }, []);
+  }, [isEnabled]);
 
   return {
     loading,
