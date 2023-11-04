@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 
 import { Feed } from "./pages/feed.jsx";
 import { Breeds } from "./pages/breeds.jsx";
-import { Upload } from "./pages/upload.jsx";
 import { Favorites } from "./pages/favorites.jsx";
 import { NavBar } from "./components/nav-bar/NavBar";
 import "./styles/reset.css";
@@ -36,7 +35,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="/" element={<Feed />} />
             <Route path="/breeds" element={<Breeds />} />
             <Route path="/favorites" element={<Favorites />} />
-            <Route path="/upload" element={<Upload />} />
           </Routes>
         </Box>
       </BrowserRouter>
