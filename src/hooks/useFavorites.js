@@ -7,10 +7,11 @@ import {
 } from "../api-clients/dog-api-client";
 
 export function useFavorites(isEnabled = true) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
   const addToFavorites = async (imageId) => {
+    setLoading(true);
     const response = await addFavoriteImage(imageId);
 
     if (response.message === "SUCCESS") {
